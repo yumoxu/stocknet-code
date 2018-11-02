@@ -1,0 +1,82 @@
+---
+model:
+  mode: 'all'
+  variant_type: 'hedge' # hedge, tech, fund, discriminative
+  alpha: 0.5 # 0.1, 0.3, 0.5, 0.7, 0.9, 1.0
+  dropout_vmd_in: 0.3
+  dropout_mel_in: 0.3
+  n_epochs: 15
+  batch_size: 32
+
+  kl_lambda_anneal_rate: 0.005  # 0.005, 0.002, 0.001, 0.0005
+  kl_lambda_start_step: 0
+  daily_att: 'y'  # y, g
+
+  vmd_rec: 'zh'  # zh or h
+
+  opt: 'adam'  # sgd, adam
+  lr: 0.001
+  clip: 15.0
+
+  y_size: 2
+  use_constant_kl_lambda: 0
+  constant_kl_lambda: 0.1
+
+  word_embed_type: 'glove'
+  weight_init: 'xavier-uniform'
+  mel_cell_type: 'gru'  # basic, gru, ln-lstm
+  vmd_cell_type: 'gru'  # basic, gru, ln-lstm
+
+  word_embed_size: 50
+  stock_embed_size: 150
+  init_stock_with_word: 0
+  mel_h_size: 100
+  h_size: 150
+  g_size: 50
+
+  shuffle: 1
+  max_n_days: 5
+  max_n_msgs: 30
+  max_n_words: 40
+
+  decay_step: 100
+  decay_rate: 0.96
+  momentum: 0.9
+
+  use_in_bn: 0
+  use_o_bn: 0
+  use_g_bn: 0
+  dropout_mel: 0.0
+  dropout_ce: 0.0
+  dropout_vmd: 0.0
+
+dates:
+  train_start_date: '2014-01-01'
+  train_end_date: '2015-08-01'
+  dev_start_date: '2015-08-01'
+  dev_end_date: '2015-10-01'
+  test_start_date: '2015-10-01'
+  test_end_date: '2016-01-01'
+
+stocks:
+  materials: ['XOM', 'RDS-B', 'PTR', 'CVX', 'TOT', 'BP', 'BHP', 'SNP', 'SLB', 'BBL']
+  consumer_goods: ['AAPL', 'PG', 'BUD', 'KO', 'PM', 'TM', 'PEP', 'UN', 'UL', 'MO']
+  healthcare: ['JNJ', 'PFE', 'NVS', 'UNH', 'MRK', 'AMGN', 'MDT', 'ABBV', 'SNY', 'CELG']
+  services: ['AMZN', 'BABA', 'WMT', 'CMCSA', 'HD', 'DIS', 'MCD', 'CHTR', 'UPS', 'PCLN']
+  utilities: ['NEE', 'DUK', 'D', 'SO', 'NGG', 'AEP', 'PCG', 'EXC', 'SRE', 'PPL']
+  cong: ['IEP', 'HRG', 'CODI', 'REX', 'SPLP', 'PICO', 'AGFS', 'GMRE']
+  finance: ['BCH', 'BSAC', 'BRK-A', 'JPM', 'WFC', 'BAC', 'V', 'C', 'HSBC', 'MA']
+  industrial_goods: ['GE', 'MMM', 'BA', 'HON', 'UTX', 'LMT', 'CAT', 'GD', 'DHR', 'ABB']
+  tech: ['GOOG', 'MSFT', 'FB', 'T', 'CHL', 'ORCL', 'TSM', 'VZ', 'INTC', 'CSCO']
+
+paths:
+  data: 'data/'
+  tweet_retrieved: 'tweet/raw'
+  tweet_preprocessed: 'tweet/preprocessed'
+  price: 'price/preprocessed'
+  res: 'res/'
+  glove: 'glove.twitter.27B.50d.txt'
+  vocab_tweet: 'vocab.txt'
+  graphs: 'graphs'
+  checkpoints: 'checkpoints'
+  log: 'log/'
